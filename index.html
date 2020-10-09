@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<title>Cross-Browser QRCode generator for Javascript</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+<style>
+
+	#qrcode{
+		padding: 10px;
+		/* background-color: red; */
+		/* border: 1px solid; */
+		width: fit-content;
+	}
+
+	 img{
+		width: 250px;
+		height: auto;
+	}
+	canvas{
+		width: fit-content;
+		height: fit-content;
+	}
+</style>
+</head>
+<body>
+<input id="text" type="text" value="luistapialml@gmail.com" style="width:200px;height: 200px;" /><br />
+<div id="qrcode"  style="margin-top:15px;" ></div>
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+    width: 500,
+    height: 500,
+    colorDark : "#000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+
+function generar_codigo () {		
+	var elText = document.getElementById("text");
+	
+	if (!elText.value) {
+		alert("Input a text");
+		elText.focus();
+		return;
+	}
+	
+	qrcode.makeCode(elText.value);
+	
+	setTimeout(() => {
+
+
+
+	
+			var canvas = document.querySelector('#qrcode').querySelector('canvas');
+			canvas.style.display='block'
+			// if (canvas.getContext) {
+			// 	var ctx = canvas.getContext("2d");
+
+			// 	//define the colour of the square
+			// 	ctx.strokeStyle = "blue";
+			// 	ctx.fillStyle = "blue";
+
+		
+
+			// 	// Draw a square using the fillRect() method and fill it with the colour specified by the fillStyle attribute
+			// 	let ancho = 400;
+			// 	let largo = 100;
+			// 	ctx.fillRect((250-(ancho/2)),(250-(largo/2)),ancho,largo);
+				
+			// 	ctx.strokeStyle = "red";
+			// 	ctx.fillStyle = "red";
+			// 	ctx.fillRect(250,250,1,1);
+			// 	ctx.stroke();
+
+			// }
+			// var dataURL = canvas.toDataURL();
+
+			// let img = document.createElement('img');
+			// img.src = dataURL;
+
+			// document.body.appendChild(img)
+
+			// var link = document.createElement("a");
+
+			// document.body.appendChild(link); // for Firefox
+
+			// link.innerHTML='descargame perro'
+
+			// link.setAttribute("href", dataURL);
+			// link.setAttribute("download", "nombreimganen.png");
+
+	}, 2000);
+	// link.click();
+
+}
+generar_codigo();
+
+
+$("#text").
+	on("blur", function () {
+		generar_codigo();
+	}).
+	on("keydown", function (e) {
+		if (e.keyCode == 13) {
+			generar_codigo();
+		}
+	});
+
+   
+
+</script>
+</body>
