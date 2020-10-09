@@ -1,6 +1,7 @@
+# 
 ``` diff 
 - this is an edited copy of QRCode.js library
-
+```
 
 # QRCode.js
 QRCode.js is javascript library for making QRCode. QRCode.js supports Cross-browser with HTML5 Canvas and table tag in DOM.
