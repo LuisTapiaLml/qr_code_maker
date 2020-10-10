@@ -1,4 +1,4 @@
-
+import {QRCode} from './qrcode.js'; 
 
 let qrcode = new QRCode(document.getElementById("qrcode"), {
     width:500,
@@ -18,7 +18,9 @@ function generar_codigo () {
 		return;
 	}
 	
-	qrcode.makeCode(elText.value);
+	let oQrCode = qrcode.makeCode(elText.value);
+
+	console.log('eureka-->',oQrCode);
 }
 generar_codigo();
 

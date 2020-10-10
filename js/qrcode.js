@@ -8,7 +8,7 @@
  * @see <a href="http://www.d-project.com/" target="_blank">http://www.d-project.com/</a>
  * @see <a href="http://jeromeetienne.github.com/jquery-qrcode/" target="_blank">http://jeromeetienne.github.com/jquery-qrcode/</a>
  */
-let QRCode;
+// let QRCode;
 
 // (function () { // quique esta linea no esta comentada
 	//---------------------------------------------------------------------
@@ -601,22 +601,7 @@ let QRCode;
 		return typeof CanvasRenderingContext2D != "undefined";
 	}
 
-	// android 2.x doesn't support Data-URI spec
-	function _getAndroid() {
-		var android = false;
-		var sAgent = navigator.userAgent;
 
-		if (/android/i.test(sAgent)) { // android
-			android = true;
-			var aMat = sAgent.toString().match(/android ([0-9]\.[0-9])/i);
-
-			if (aMat && aMat[1]) {
-				android = parseFloat(aMat[1]);
-			}
-		}
-
-		return android;
-	}
 
 	var svgDrawer = (function () {
 
@@ -733,32 +718,9 @@ let QRCode;
 
 		return Drawing;
 	})() : (function () { // Drawing in Canvas
-		function _onMakeImage() {
-			this._elImage.src = this._elCanvas.toDataURL("image/png");
-			this._elImage.style.display = "none"; //recuerda quique, esto estaba al reves
-			this._elCanvas.style.display = "block";
-		}
+		
 
-		// Android 2.1 bug workaround
-		// http://code.google.com/p/android/issues/detail?id=5141
-		if (this._android && this._android <= 2.1) {
-			var factor = 1 / window.devicePixelRatio;
-			var drawImage = CanvasRenderingContext2D.prototype.drawImage;
-			CanvasRenderingContext2D.prototype.drawImage = function (image, sx, sy, sw, sh, dx, dy, dw, dh) {
-				if (("nodeName" in image) && /img/i.test(image.nodeName)) {
-					for (var i = arguments.length - 1; i >= 1; i--) {
-						arguments[i] = arguments[i] * factor;
-					}
-				} else if (typeof dw == "undefined") {
-					arguments[1] *= factor;
-					arguments[2] *= factor;
-					arguments[3] *= factor;
-					arguments[4] *= factor;
-				}
-
-				drawImage.apply(this, arguments);
-			};
-		}
+	
 
 		/**
 		 * Check whether the user's browser supports Data URI or not
@@ -767,40 +729,7 @@ let QRCode;
 		 * @param {Function} fSuccess Occurs if it supports Data URI
 		 * @param {Function} fFail Occurs if it doesn't support Data URI
 		 */
-		function _safeSetDataURI(fSuccess, fFail) {
-			var self = this;
-			self._fFail = fFail;
-			self._fSuccess = fSuccess;
-
-			// Check it just once
-			if (self._bSupportDataURI === null) {
-				var el = document.createElement("img");
-				var fOnError = function () {
-					self._bSupportDataURI = false;
-
-					if (self._fFail) {
-						self._fFail.call(self);
-					}
-				};
-				var fOnSuccess = function () {
-					self._bSupportDataURI = true;
-
-					if (self._fSuccess) {
-						self._fSuccess.call(self);
-					}
-				};
-
-				el.onabort = fOnError;
-				el.onerror = fOnError;
-				el.onload = fOnSuccess;
-				el.src = "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="; // the Image contains 1px data.
-				return;
-			} else if (self._bSupportDataURI === true && self._fSuccess) {
-				self._fSuccess.call(self);
-			} else if (self._bSupportDataURI === false && self._fFail) {
-				self._fFail.call(self);
-			}
-		};
+		
 
 		/**
 		 * Drawing QRCode by using canvas
@@ -811,7 +740,7 @@ let QRCode;
 		 */
 		var Drawing = function (el, htOption) {
 			this._bIsPainted = false;
-			this._android = _getAndroid();
+			
 
 			this._htOption = htOption;
 			this._elCanvas = document.createElement("canvas");
@@ -834,7 +763,7 @@ let QRCode;
 		 * @param {QRCode} oQRCode 
 		 */
 		Drawing.prototype.draw = function (oQRCode) {
-			console.log(oQRCode);
+
 			var _elImage = this._elImage;
 			var _oContext = this._oContext;
 			var _htOption = this._htOption;
@@ -883,14 +812,6 @@ let QRCode;
 			this._bIsPainted = true;
 		};
 
-		/**
-		 * Make the image from Canvas if the browser supports Data URI.
-		 */
-		Drawing.prototype.makeImage = function () {
-			if (this._bIsPainted) {
-				_safeSetDataURI.call(this, _onMakeImage);
-			}
-		};
 
 		/**
 		 * Return whether the QRCode is painted or not
@@ -999,7 +920,7 @@ let QRCode;
 	 * @param {QRCode.CorrectLevel} [vOption.correctLevel=QRCode.CorrectLevel.H] [L|M|Q|H] 
 	 */
 	// // este comentario no estaba quique  drawTypes = square , circle , roundedSquare, dotedSquare
-	QRCode = function (el, vOption) {
+	const QRCode = function (el, vOption) {
 		this._htOption = {
 			width: 256,
 			height: 256,
@@ -1031,7 +952,7 @@ let QRCode;
 			Drawing = svgDrawer;
 		}
 
-		this._android = _getAndroid();
+		
 		this._el = el;
 		this._oQRCode = null;
 		this._oDrawing = new Drawing(this._el, this._htOption);
@@ -1048,13 +969,12 @@ let QRCode;
 	 */
 	QRCode.prototype.makeCode = function (sText) {
 		this._oQRCode = new QRCodeModel(_getTypeNumber(sText, this._htOption.correctLevel), this._htOption.correctLevel);
-		console.log("solo iniciado -->",this._oQRCode);//quique, esta linea no estaba
+
 		this._oQRCode.addData(sText);
 		this._oQRCode.make();
 		this._el.title = sText;
-		console.log("despues del make -->",this._oQRCode); //quique, esta linea no estaba
-		this._oDrawing.draw(this._oQRCode);
-		this.makeImage();
+	
+		return this._oQRCode;
 	};
 
 	/**
@@ -1065,7 +985,7 @@ let QRCode;
 	 * @private
 	 */
 	QRCode.prototype.makeImage = function () {
-		if (typeof this._oDrawing.makeImage == "function" && (!this._android || this._android >= 3)) {
+		if (typeof this._oDrawing.makeImage == "function" ) {
 			this._oDrawing.makeImage();
 		}
 	};
@@ -1084,3 +1004,4 @@ let QRCode;
 // })(); //quique esta linea no estaba comentada
 
 
+export {QRCode};
