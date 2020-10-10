@@ -1,33 +1,107 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Cross-Browser QRCode generator for Javascript</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codigo QR</title>
 
-<script type="text/javascript" src="js/qrcode.js"></script>
-<style>
-
-	#qrcode{
-		padding: 10px;
-		/* background-color: red; */
-		/* border: 1px solid; */
-		width: fit-content;
-	}
-
-	 img{
-		width: 250px;
-		height: auto;
-	}
-	canvas{
-		width: fit-content;
-		height: fit-content;
-	}
-</style>
+    <link rel="stylesheet" href="assets/estilos/css/vistas/inicio/inicio.css">
+    <script src="js/qrcode.js"></script>
 </head>
 <body>
-<input id="text" type="text" value="luistapialml@gmail.com" style="width:200px;height: 200px;" /><br />
-<div id="qrcode"  style="margin-top:15px;" ></div>
 
-<script type="module" src="js/main.js"></script>
+    <header class="cabecera">
+        <div class="logo">
+            Generador <span>QR</span>
+        </div>
+        <div class="seccion_sesion">
+            <a href="/Iniciar_sesion">Iniciar Sesión</a>
+            <a href="/registro">Registrarse</a>
+        </div>
+    </header>
+
+    <div id="contenedor_principal">
+        <section class="contenedor_formularios">
+            <div class="contenedor_opciones">
+                <div class="boton_opcion activo" data-opcion="url">URL</div>
+                <div class="boton_opcion" data-opcion="vcard">Vcard</div>
+                <div class="boton_opcion" data-opcion="email">Email</div>
+                <div class="boton_opcion" data-opcion="sms">SMS</div>
+                <div class="boton_opcion" data-opcion="texto">Texto</div>
+            </div>
+            <section class="formularios">
+                
+                    <article class="formulario_codigo activo" data-tipo="url">
+                        <label for="url">
+                            <span>URL</span>
+                            <input type="text" id="url" class="campo_data" name="url">
+                        </label>
+                        
+                    </article>
+                    <article class="formulario_codigo" data-tipo="vcard">
+                        <label for="nombre_tel">
+                           <span>Nombre</span>
+                           <input type="text" id="nombre_tel" class="campo_data" name="nombre_tel">
+                        </label>
+                        <label for="tel_tel">
+                            <span>Télefono</span>
+                            <input type="text" id="tel_tel" class="campo_data" name="tel_tel">
+                         </label>
+                         <label for="tel_tel">
+                            <span>Email</span>
+                            <input type="text" id="email_tel" class="campo_data" name="email_tel">
+                         </label>    
+                    </article>
+                    <article class="formulario_codigo" data-tipo="email">
+                        <label for="email_email">
+                           <span>Email</span>
+                           <input type="text" id="email_email" class="campo_data" name="email_email">
+                        </label>
+                        <label for="asunto_email">
+                            <span>Asunto</span>
+                            <input type="text" id="asunto_email" class="campo_data" name="asunto_email">
+                         </label>
+                         <label for="mensaje_email">
+                            <span>Mensaje</span>
+                            <textarea id="mensaje_email" class="campo_data" name="mensaje_email"></textarea>
+                         </label>      
+                    </article>
+                    <article class="formulario_codigo" data-tipo="sms">
+                        <label for="tel_sms">
+                            <span>Télefono</span>
+                            <input type="text" id="tel_sms" class="campo_data" name="tel_sms">
+                         </label>  
+                         <label for="mensaje_sms">
+                            <span>Mensaje</span>
+                            <textarea id="mensaje_sms" class="campo_data" name="mensaje_sms"></textarea>
+                         </label>      
+                    </article>
+                    <article class="formulario_codigo" data-tipo="texto">
+                        <label for="texto_texto">
+                            <span>Texto</span>
+                            <textarea class="campo_data" name="texto_texto" id="texto_texto" ></textarea>
+                        </label>
+                    </article>
+                
+                
+            </section>
+            <footer>
+                <button id="boton_generar_codigo" class="boton_generar">Generar Código QR</button>
+            </footer>
+
+        </section>
+        <section class="vista_codigo">
+            vista codigo_qr
+        </section>
+    </div>
+
+    <footer>
+        Iconos diseñados por <a href="https://www.flaticon.es/autores/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon"> www.flaticon.es</a>
+    </footer>
+
+    <script type="module" src="assets/js/codigo_qr.js"></script>
+
+   
 </body>
+</html>
+

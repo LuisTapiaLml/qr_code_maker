@@ -1,0 +1,3 @@
+2020-10-10 05:09:30: <br />
+<b>Notice</b>:  Array to string conversion in <b>D:\xampp\htdocs\codigo_qr\assets\php\phpqrcode\qrencode.php</b> on line <b>234</b><br />
+Array
