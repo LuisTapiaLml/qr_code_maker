@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <form id="formulario_colores">
+        <label >
+            <span>color esquinas</span>
+            <input type="color" value="#028090" name="color_esquinas" id="color_esquinas">
+        </label>
+        <label >
+            <span>color oscuro</span>
+            <input type="color" value="#1b2432" name="color_oscuro" id="color_oscuro">
+        </label>
+        <label >
+            <span>color frondo</span>
+            <input type="color" value="#ffffff" name="color_fondo" id="color_fondo">
+        </label>
+        <label >
+            <span>Logotipo</span>
+            <input type="file"  name="logotipo" id="logotipo">
+        </label>
+        
+        <label >
+            <span>tipo figura</span>
+            <select name="tipo_figura" id="tipo_figura">
+                <option value="circular">circular</option>
+                <option value="cuadrado">cuadrada</option>
+                <option value="cuadro_punto">Cuadro punto</option>
+                <option value="dino">Dino</option>
+            </select>
+        </label>
+
+        <button>
+            Generar Codigo
+        </button>
+    </form>
+
+    <div id="contenedor_codigo">
+        <canvas width="270" height="270" id="canvas"> </canvas>
+        <div id="contenedor_link_descarga"></div>
+    </div>
+    
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

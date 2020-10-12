@@ -1,0 +1,15 @@
+*,*::after,*::before{
+    outline: none;
+    box-sizing: border-box;
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+    width: 100%;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    background-color: #F1F3F4;
+}
