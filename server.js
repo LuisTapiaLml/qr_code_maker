@@ -4,10 +4,10 @@ const app =  express();
 
 app.listen('3000');
 
-app.use(express.static('public'));
+app.use('/qrcode',express.static(__dirname + '/public'));
 
-app.get('/',(req,res)=>{
-    res.render(index.html);
+app.get('/qrcode',(req,res)=>{
+    res.render('index.html');
 });
 
-console.log('listening port 3000');
+console.log('listening port 3000'); 
