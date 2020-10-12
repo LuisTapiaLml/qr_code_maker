@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codigo QR</title>
-    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="libreria/sweetalert2.min.css">
     <script src="libreria/sweetalert2.all.min.js"></script>
 
-    <link rel="stylesheet" href="estilos/css/inicio.css">
+    <link rel="stylesheet" href="estilos/css/qrcode.css">
    
 </head>
 
@@ -17,11 +17,13 @@
 
     <header id="cabecera">
         <div class="logo">
-            Generador <span>QR</span>
+            <img src="img/logo.svg" alt="logo_qr_code_maker">
+            <div>
+                Generador <br> <span>Codigo QR</span>
+            </div>
         </div>
         <div class="seccion_sesion">
-            <a href="/Iniciar_sesion">Iniciar Sesión</a>
-            <a href="/registro">Registrarse</a>
+            
         </div>
     </header>
 
@@ -91,8 +93,8 @@
             <footer>
                 <button id="boton_generar_codigo" class="boton_generar">Generar Código QR</button>
             </footer>
-
         </section>
+
         <section id="contenedor_configuracion_codigo">
             <label >
                 <span>color esquinas</span>
@@ -106,18 +108,18 @@
                 <span>color frondo</span>
                 <input type="color" value="#ffffff" name="color_fondo" id="color_fondo">
             </label>
-            <label >
+            <!-- <label >
                 <span>Logotipo</span>
                 <input type="file"  name="logotipo" id="logotipo">
-            </label>
+            </label> -->
             
             <label >
                 <span>tipo figura</span>
                 <select name="tipo_figura" id="tipo_figura">
                     <option value="cuadrado">cuadrada</option>
                     <option value="circular">circular</option>
-                    <option value="cuadro_punto">Cuadro punto</option>
-                    <option value="dino">Dino</option>
+                    <!-- <option value="cuadro_punto">Cuadro punto</option> -->
+                    <!-- <option value="dino">Dino</option> -->
                 </select>
             </label>
     

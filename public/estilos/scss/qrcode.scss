@@ -1,0 +1,27 @@
+@import './general';
+@import './elementos/formulario_codigo';
+@import './elementos/configuracion_codigo';
+@import './elementos/vista_codigo';
+@import './elementos/descarga_codigo';
+
+
+
+label{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    input,textarea,select{
+        width: 100%;
+        padding: 10px 10px;
+        border: 1px solid #b8b8b8;
+    }
+    input[type="color"]{
+        padding: 0;
+    }
+    textarea{
+        height: 100px;
+    }
+}
+
+
