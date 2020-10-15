@@ -6,7 +6,36 @@
     padding: 20px;
 }
 
+.contenedor_patrones{
+    display: flex;
+    .patron{
+        border: 2px solid #d1d1d1;
+        border-radius: 3px;
 
-// @media max-width (900px){
+        cursor: pointer;
 
-// }
+        margin-right: 10px;
+        margin-top: 10px;
+        padding: 5px;
+        img{
+            width: 35px;
+        }
+
+        &.activo{
+            border: 2px solid #00BFFF;
+        }
+        &:hover{
+            border: 2px solid #00BFFF;
+            box-shadow: 1px 1px 1px  #00BFFF;;
+        }
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    #contenedor_configuracion_codigo {
+      width: calc( 100% - 20px );
+      margin: 0 auto; 
+      height: fit-content;
+    }
+}

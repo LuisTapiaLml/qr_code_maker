@@ -98,15 +98,15 @@
         <section id="contenedor_configuracion_codigo">
             <label >
                 <span>color esquinas</span>
-                <input type="color" value="#028090" name="color_esquinas" id="color_esquinas">
+                <input type="color" value="#028090" class="campo_data" name="color_esquinas" id="color_esquinas">
             </label>
             <label >
                 <span>color oscuro</span>
-                <input type="color" value="#1b2432" name="color_oscuro" id="color_oscuro">
+                <input type="color" value="#1b2432" class="campo_data" name="color_oscuro" id="color_oscuro">
             </label>
             <label >
                 <span>color frondo</span>
-                <input type="color" value="#ffffff" name="color_fondo" id="color_fondo">
+                <input type="color" value="#ffffff" class="campo_data" name="color_fondo" id="color_fondo">
             </label>
             <!-- <label >
                 <span>Logotipo</span>
@@ -115,17 +115,23 @@
             
             <label >
                 <span>tipo figura</span>
-                <select name="tipo_figura" id="tipo_figura">
+                <input type="hidden" value="cuadrado" class="campo_data" id="tipo_figura" name="tipo_figura">
+                <!-- <select name="tipo_figura" id="tipo_figura">
                     <option value="cuadrado">cuadrada</option>
                     <option value="circular">circular</option>
-                    <!-- <option value="cuadro_punto">Cuadro punto</option> -->
-                    <!-- <option value="dino">Dino</option> -->
-                </select>
+                    <option value="cuadro_punto">Cuadro punto</option>
+                    <option value="dino">Dino</option>
+                </select> -->
+                <div class="contenedor_patrones" >
+                    <div class="patron activo" data-tipo="cuadrado">
+                        <img src="img/patrones/patron_cuadrado.svg" alt="">
+                    </div>
+                    <div class="patron" data-tipo="circular">
+                        <img src="img/patrones/patron_circular.svg" alt="">
+                    </div>
+                </div>
             </label>
     
-            <button id="">
-                Generar Codigo
-            </button>
         </section>
         <section class="vista_codigo">
             <canvas id="canvas" width="300" height="300">
@@ -134,6 +140,22 @@
             <div id="contenedor_link_descarga"></div>
         </section>
         <canvas id="canvas_descarga" ></canvas>
+    </div>
+
+    <div class="contenedor_descarga">
+        <img src="img/muestra_codigo.png"  alt="preview_descarga_codigo">
+         <label >
+             <span>Formato de imagen</span>
+             <select name="formato_img_descarga" id="formato_img_descarga">
+                <option value="png">PNG</option>
+                <option value="jpg">JPG</option>
+                <option value="JPEG">JPEG</option>
+             </select>
+             <label>
+                 <span>Tamaño de imagen (px)</span>
+                 <input min="0" max="2000" type="number" name="tamaño_img_descarga" id="tamaño_img_descarga">
+             </label>
+         </label>
     </div>
 
     <footer id="pie_de_pagina">

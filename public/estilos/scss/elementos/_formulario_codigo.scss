@@ -58,6 +58,8 @@
     }
 }
 
+
+
 .formulario_codigo{
     display: none;
     
@@ -67,5 +69,14 @@
 
         display: flex;
 
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    .contenedor_formularios  {
+      width: calc( 100% - 20px );
+      margin: 10px auto; 
+      height: fit-content;
     }
 }

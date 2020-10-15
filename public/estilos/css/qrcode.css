@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -19,7 +23,7 @@ body, html {
 }
 
 #contenedor_principal {
-  margin-top: 70px;
+  padding-top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,9 +33,19 @@ body, html {
 }
 
 #pie_de_pagina {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
   width: 100%;
-  height: 70px;
-  min-height: 5%;
+  padding: 15px;
+  min-height: calc( 10% - 20px );
+  background-color: #fff;
+  border-top: 1px solid #d1d1d1;
+}
+
+.contenedor_descarga {
+  width: 100%;
+  padding: 15px;
 }
 
 #cabecera {
@@ -113,6 +127,13 @@ body, html {
   display: flex;
 }
 
+@media screen and (max-width: 800px) {
+  .contenedor_formularios {
+    width: calc( 100% - 20px );
+    margin: 10px auto;
+    height: fit-content;
+  }
+}
 #contenedor_configuracion_codigo {
   background-color: #fff;
   border: 2px solid #d1d1d1;
@@ -121,6 +142,35 @@ body, html {
   padding: 20px;
 }
 
+.contenedor_patrones {
+  display: flex;
+}
+.contenedor_patrones .patron {
+  border: 2px solid #d1d1d1;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
+.contenedor_patrones .patron img {
+  width: 35px;
+}
+.contenedor_patrones .patron.activo {
+  border: 2px solid #00BFFF;
+}
+.contenedor_patrones .patron:hover {
+  border: 2px solid #00BFFF;
+  box-shadow: 1px 1px 1px #00BFFF;
+}
+
+@media screen and (max-width: 800px) {
+  #contenedor_configuracion_codigo {
+    width: calc( 100% - 20px );
+    margin: 0 auto;
+    height: fit-content;
+  }
+}
 .vista_codigo {
   width: 350px;
   height: 500px;
@@ -143,6 +193,7 @@ body, html {
   align-self: flex-end;
   text-align: center;
   justify-content: center;
+  margin-top: 15px;
 }
 .vista_codigo #contenedor_link_descarga a {
   padding: 8px 12px;
@@ -150,9 +201,28 @@ body, html {
   color: white;
   text-decoration: none;
   border: none;
+  display: block;
 }
 
+@media screen and (max-width: 800px) {
+  .vista_codigo {
+    width: calc( 100% - 20px );
+    display: none;
+    margin: 10px auto;
+    height: unset;
+  }
+  .vista_codigo.activo {
+    display: flex;
+    position: fixed;
+    top: 15px;
+    z-index: 10;
+  }
+}
 #canvas_descarga {
+  display: none;
+}
+
+.contenedor_descarga {
   display: none;
 }
 
@@ -161,6 +231,10 @@ label {
   display: flex;
   flex-direction: column;
   margin: 5px 0;
+}
+label span {
+  font-weight: bold;
+  text-transform: capitalize;
 }
 label input, label textarea, label select {
   width: 100%;

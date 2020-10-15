@@ -1,40 +1,28 @@
-let canvas = document.querySelector('#canvas');
-let ctx = canvas.getContext('2d');
+import { valores } from './constructor_codigo.js'; 
+import { es_esquina } from './patrones/es_esquina.js';
+import { pintar_circulo } from './patrones/pintar_circulo.js';
+import { pintar_cuadrado } from "./patrones/pintar_cuadrado.js";
+import { pintar_esquina } from './patrones/pintar_esquina.js';
 
-let nivel = 0;
+export  function _generar_codigo(qrModel, claro , oscuro, esquina, tipo_figura, logo = null) {
+    return new Promise( async ( resolve , reject ) =>{
 
-let ancho_canvas = canvas.width;
-let alto_canvas = canvas.height;
-
-let ancho_figuras = 10;
-let alto_figuras = 10;
-
-let color_claro = "#ffffff";
-let color_oscuro = "#000000";
-let color_esquina = "#000000";
-let tipo = 'cuadrado';
-let logotipo = null;
-let oQrCode = null;
-
-// generar_codigo("#ffffff","#1b2432","#028090",tipo);
-
-export async function _generar_codigo(qrModel, claro , oscuro, esquina, tipo_figura, logo = null) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    valores.ctx.clearRect(0, 0, valores.canvas.width, valores.canvas.height);
     
-    oQrCode = qrModel;
-    nivel = oQrCode.moduleCount;
-    ancho_figuras = ancho_canvas / nivel;
-    alto_figuras = alto_canvas / nivel;
-    nivel = oQrCode.moduleCount;
+    valores.oQrCode = qrModel;
+    valores.nivel = valores.oQrCode.moduleCount;
+    valores.ancho_figuras = valores.ancho_canvas / valores.nivel;
+    valores.alto_figuras = valores.alto_canvas / valores.nivel;
+    valores.nivel = valores.oQrCode.moduleCount;
 
-    color_claro = claro;
-    color_oscuro = oscuro,
-    color_esquina = esquina;
-    tipo = tipo_figura;
+    valores.color_claro = claro;
+    valores.color_oscuro = oscuro,
+    valores.color_esquina = esquina;
+    valores.tipo = tipo_figura;
 
-    for (let fila = 0; fila < nivel; fila++) {
+    for (let fila = 0; fila < valores.nivel; fila++) {
 
-        for (let columna = 0; columna < nivel; columna++) {
+        for (let columna = 0; columna < valores.nivel; columna++) {
 
             pintar_figura(fila, columna);
 
@@ -42,9 +30,9 @@ export async function _generar_codigo(qrModel, claro , oscuro, esquina, tipo_fig
 
     }
 
-    if (logo !== null) {
-
-        let respuesta = await cargar_logo(logo);
+    if (valores.logo !== null) {
+        let respuesta = 2;
+        // let respuesta = await cargar_logo(valores.logo);
 
         if (respuesta) {
             generar_link_descarga();
@@ -55,130 +43,35 @@ export async function _generar_codigo(qrModel, claro , oscuro, esquina, tipo_fig
     } else {
         generar_link_descarga();
     }
-
+    resolve(true);
+    });
 }
 
 function pintar_figura(x, y) {
 
-    if (tipo === 'cuadrado') {
+    let esquina =  es_esquina(x,y);
+
+    if(esquina.estado){
+        pintar_esquina(x,y,esquina);
+        return false
+    }
+
+    if (valores.tipo === 'cuadrado') {
         pintar_cuadrado(x, y);
     }
 
-    if (tipo === 'circular') {
+    if (valores.tipo === 'circular') {
         pintar_circulo(x, y);
     }
 
-    if (tipo === 'cuadro_punto') {
+    if (valores.tipo === 'cuadro_punto') {
         pintar_cuadro_punto(x, y);
     }
 
-    if (tipo === 'dino') {
+    if (valores.tipo === 'dino') {
         pintar_dino(x, y);
     }
 
-}
-
-
-function es_esquina(x, y) {
-    //valida si las posiciones corresponden a los cuadros de las esquinas
-    // los cuadros SIEMPRE estan formados de 7x7 en el codigo que se genera
-    if ((y === 0 && (x < 7 || x >= oQrCode.moduleCount - 7)) ||
-        (y === 6 && (x < 7 || x >= oQrCode.moduleCount - 7)) ||
-        ((y === oQrCode.moduleCount - 7 || y === oQrCode.moduleCount - 1) && x < 7) ||
-        ((y < 7 || y >= oQrCode.moduleCount - 7) && (x === 0 || x === 6)) ||
-        (y < 7 && (x === oQrCode.moduleCount - 7 || x === oQrCode.moduleCount - 1))
-    ) { 
-        return true;
-    } else if (((y >= 2 && y <= 4) && ((x >= 2 && x <= 4) || (x > oQrCode.moduleCount - 6 && x < oQrCode.moduleCount - 2))) ||
-        ((y >= oQrCode.moduleCount - 5 && y <= oQrCode.moduleCount - 3) && (x >= 2 && x <= 4))
-    ) {
-        return true;
-    }
-    return false;
-}
-
-
-
-function pintar_cuadrado(row, col) {
-    
-    let nWidth = ancho_canvas / nivel;
-    let nHeight = alto_canvas    / nivel;
-    let nRoundedWidth = Math.round(nWidth);
-    let nRoundedHeight = Math.round(nHeight);
-    let mi_color='';
-    let bIsDark = oQrCode.modules[row][col];
-    // console.log(String(bIsDark));
-    let nLeft = col * nWidth;
-    let nTop = row * nHeight;
-
-    if(bIsDark){
-        if(es_esquina(col, row)){
-            console.log('es esquina');
-            mi_color = color_esquina
-        }else{
-            mi_color = color_oscuro
-        }
-    }else{
-        mi_color=color_claro
-    }
-
-    
-    ctx.strokeStyle = mi_color
-    ctx.lineWidth = 1;
-    if(bIsDark){
-        if(es_esquina(col, row)){
-            mi_color = color_esquina
-        }else{
-            mi_color = color_oscuro
-        }
-    }else{
-        mi_color=color_claro
-    }
-    
-    ctx.fillStyle = mi_color
-    ctx.fillRect(nLeft, nTop, nWidth, nHeight);
-
-    // 안티 앨리어싱 방지 처리
-    ctx.strokeRect(
-        Math.floor(nLeft) + 0.5,
-        Math.floor(nTop) + 0.5,
-        nRoundedWidth,
-        nRoundedHeight
-    );
-
-    ctx.strokeRect(
-        Math.ceil(nLeft) - 0.5,
-        Math.ceil(nTop) - 0.5,
-        nRoundedWidth,
-        nRoundedHeight
-    );
-
-}
-
-function pintar_circulo(x, y) {
-
-    if( es_esquina(x,y) ){
-        pintar_cuadrado(x,y);
-        return false;
-    }else if( !oQrCode.modules[x][y] ){
-        return false;
-    }
-
-    let xReal = x * ancho_figuras;
-    let yReal = y * alto_figuras;
-
-    let radio_cirulo = ancho_figuras / 2;
-
-    let centro_x = xReal + (ancho_figuras / 2);
-    let centro_y = yReal + (alto_figuras / 2);
-
-    ctx.lineWidth = 1
-    ctx.fillStyle = color_oscuro
-    ctx.strokeStyle = color_oscuro
-
-    ctx.beginPath();
-    ctx.arc(centro_x, centro_y, radio_cirulo, 0, 2 * (Math.PI));
-    ctx.fill();
 }
 
 function pintar_cuadro_punto(x, y, color) {
@@ -262,7 +155,7 @@ function generar_link_descarga() {
 
     let link = document.createElement('a');
 
-    let data_base_64 = canvas.toDataURL('image/jpeg', 1.0);
+    let data_base_64 = valores.canvas.toDataURL('image/jpeg', 1.0);
 
     contenedor_codigo.innerHTML = '';
 

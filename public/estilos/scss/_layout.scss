@@ -5,7 +5,7 @@
 }
 
 #contenedor_principal{
-    margin-top: 70px;
+    padding-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,11 +13,22 @@
     
     width: 100%;
     min-height: 90%;
+
 }
 
 
 #pie_de_pagina{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
     width: 100%;
-    height: 70px;
-    min-height: 5%;
+    padding: 15px;
+    min-height:calc( 10% - 20px ) ;
+    background-color: #fff;
+    border-top: 1px solid #d1d1d1;
+}
+
+.contenedor_descarga{
+    width: 100%;
+    padding: 15px;
 }
