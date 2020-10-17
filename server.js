@@ -4,9 +4,9 @@ const app =  express();
 
 app.listen('3000');
 
-app.use('/qrcode',express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
-app.get('/qrcode',(req,res)=>{
+app.get('/',(req,res)=>{
     res.render('index.html');
 });
 
