@@ -8,7 +8,9 @@ export  function _generar_codigo(qrModel, claro , oscuro, esquina, tipo_figura, 
     return new Promise( async ( resolve , reject ) =>{
 
     valores.ctx.clearRect(0, 0, valores.canvas.width, valores.canvas.height);
-    
+    valores.ctx.fillStyle = "white";
+    valores.ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     valores.oQrCode = qrModel;
     valores.nivel = valores.oQrCode.moduleCount;
     valores.ancho_figuras = valores.ancho_canvas / valores.nivel;
